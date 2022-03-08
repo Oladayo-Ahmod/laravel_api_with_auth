@@ -54,6 +54,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Post::find($id);
+        $post->update($request->all());
+        return $post;
     }
 
     /**
@@ -65,5 +68,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::destroy($id);
+        return response()->json("deleted");
     }
 }
