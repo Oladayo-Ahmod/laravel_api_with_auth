@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 // Route::put('/post/{id}',[PostController::class,'update']); // update  posts
 // Route::delete('/post/{id}',[PostController::class,'destroy']); // delete post
 
-Route::resource('/post',PostController::class);
+// versioning the api
+Route::prefix('v1')->group(function(){
+    Route::apiResource('/post',PostController::class);
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
