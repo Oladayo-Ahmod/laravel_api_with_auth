@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/post',[PostController::class,'index']); // get request
-Route::get('/post/{id}',[PostController::class,'index']);
+Route::get('/post',[PostController::class,'index']); // get all the data
+Route::get('/post/{id}',[PostController::class,'show']); // get data of a specific id
+Route::post('/post',[PostController::class,'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
