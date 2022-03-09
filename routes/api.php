@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,14 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('/post',PostController::class); // shorter way
 });
 
+// create a user
+Route::get('/user-create',function(){
+    User::create([
+        'name' => 'oladayo ahmod',
+        'email' => 'oladayoahmod112@gmail.com',
+        'password'=>Hash::make('olami')
+    ]);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
