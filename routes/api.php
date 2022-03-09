@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+    // quite longer way
 // Route::get('/post',[PostController::class,'index']); // get all the data
 // Route::get('/post/{id}',[PostController::class,'show']); // get data of a specific id
 // Route::post('/post',[PostController::class,'store']); // create new posts
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 // versioning the api
 Route::prefix('v1')->group(function(){
-    Route::apiResource('/post',PostController::class);
+    Route::apiResource('/post',PostController::class); // shorter way
 });
 
 
