@@ -38,7 +38,12 @@ Route::get('/user-create',function(){
 });
 
 // login user
+Route::get('/user-login',function(Request $request){
+    $credentials = request()->only(['email','password']);
+    $token = auth()->attempt($credentials);
+    return $token;
 
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
