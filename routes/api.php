@@ -37,6 +37,8 @@ Route::get('/user-create',function(){
     ]);
 });
 
+// login user
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
