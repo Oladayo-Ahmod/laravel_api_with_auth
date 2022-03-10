@@ -38,7 +38,7 @@ Route::get('/user-create',function(){
 });
 
 // login user
-Route::get('/user-login',function(Request $request){
+Route::get('/user-login',function(){
     $credentials = request()->only(['email','password']);
     $token = auth()->attempt($credentials);
     return $token;
