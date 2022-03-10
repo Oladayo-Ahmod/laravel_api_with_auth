@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\JWTController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,21 +29,28 @@ Route::prefix('v1')->group(function(){
     Route::apiResource('/post',PostController::class); // shorter way
 });
 
-// create a user
-Route::get('/user-create',function(){
-    User::create([
-        'name' => 'oladayo ahmod',
-        'email' => 'oladayoahmod112@gmail.com',
-        'password'=>Hash::make('olami')
-    ]);
-});
+// // create a user
+// Route::get('/user-create',function(){
+//     User::create([
+//         'name' => 'oladayo ahmod',
+//         'email' => 'oladayoahmod113@gmail.com',
+//         'password'=>Hash::make('olami')
+//     ]);
+// });
 
-// login user
-Route::get('/user-login',function(){
-    $credentials = request()->only(['email','password']);
-    $token = auth()->attempt($credentials);
-    return $token;
+// // login user
+// Route::get('/user-login',function(){
+//     $credentials = request()->only(['email','password']);
+//     $token = auth('api')->attempt($credentials);
+//     return $token;
 
+// });
+Route::group(['middleware' => 'api'], function($router) {
+    Route::post('/register', [JWTController::class, 'register']);
+    Route::post('/login', [JWTController::class, 'login']);
+    Route::post('/logout', [JWTController::class, 'logout']);
+    Route::post('/refresh', [JWTController::class, 'refresh']);
+    Route::post('/profile', [JWTController::class, 'profile']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
