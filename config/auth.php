@@ -40,12 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
     ],
-    'api' => [
-        'driver' => 'jwt',
-        'provider' => 'users',
-        'hash' => false,
-    ],
+    
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -64,17 +65,6 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -112,5 +102,16 @@ return [
     */
 
     'password_timeout' => 10800,
+       'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
 
 ];
