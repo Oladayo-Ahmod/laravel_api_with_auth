@@ -17,7 +17,7 @@ use App\Http\Controllers\JWTController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-    // quite longer way
+    // quite longer way without authentication
 // Route::get('/post',[PostController::class,'index']); // get all the data
 // Route::get('/post/{id}',[PostController::class,'show']); // get data of a specific id
 // Route::post('/post',[PostController::class,'store']); // create new posts
@@ -25,9 +25,9 @@ use App\Http\Controllers\JWTController;
 // Route::delete('/post/{id}',[PostController::class,'destroy']); // delete post
 
 // versioning the api
-Route::prefix('v1')->group(function(){
-    Route::apiResource('/post',PostController::class); // shorter way
-});
+// Route::prefix('v1')->group(function(){
+//     Route::apiResource('/post',PostController::class); // shorter way
+// });
 
 // // create a user
 // Route::get('/user-create',function(){
@@ -45,6 +45,7 @@ Route::prefix('v1')->group(function(){
 //     return $token;
 
 // });
+// using jwt for authentication
 Route::group(['middleware' => 'api'], function($router) {
     Route::post('/register', [JWTController::class, 'register']);
     Route::post('/login', [JWTController::class, 'login']);
@@ -52,6 +53,6 @@ Route::group(['middleware' => 'api'], function($router) {
     Route::post('/refresh', [JWTController::class, 'refresh']);
     Route::post('/profile', [JWTController::class, 'profile']);
 });
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
