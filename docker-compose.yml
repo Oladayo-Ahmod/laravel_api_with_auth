@@ -8,6 +8,8 @@ services:
 
     ports : 
      - "8080:80"
+    volumes: 
+     - ./src : /var/www/html
      
     depends_on :
       -php
@@ -17,9 +19,39 @@ services:
       - laravel
 
   mysql : 
+    images : mysql:5.7.22
+
+    container_name : laravel_api
+
+    restart : unless-stopped
+
+    tty : true
+
+    ports : 
+     - "3306:3306"
+
+    volumes :
+     - ./mysql : /var/lib/mysql
+
+    environment :
+     -MYSQL_DATABASE : laravel_api_auth
+     -MYSQL_USERNAME: root
+     -MYSQL_ROOT_PASSWORD:
+     -MYSQL_PASSWORD:
+      SERVICE_TAGS : dev
+      SERVICE_NAME : mysql
+     
     networks :
       - laravel
 
   php :
+    build :
+      context : 
+        dockerfile : Dockerfile
+    container_name : laravel_api
+    volumes : 
+      - ./src : /var/www/html
+    ports : 
+      - "9000:9000"
     networks :
       - laravel
